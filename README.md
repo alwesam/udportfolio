@@ -17,12 +17,14 @@ The optimized pages are hosted at: alwesam.github.com/udportfolio
 
 ### To verify the optimizations made:
 
-## 1) Verifying the PageSpeed score of index.html:
+#### 1) Verifying the PageSpeed score of index.html
+
 a) Visit Google PageSpeed Insights on your web browser
 b) Enter the following website: alwesam.github.com/udportfolio/index.html
 c) Take note of the scores for both mobile and desktop
 
-## 2) Verifying frame rate of views/pizza.html
+#### 2) Verifying frame rate of views/pizza.html
+
 a) On your chrome browser, visit alwesam.github.com/udportfolio/views/pizza.html or follow the link from index.html
 b) Enter Ctrl+Shift+I, this will show the chrome dev tool
 c) Click on the Timeline tab
@@ -30,7 +32,8 @@ d) Click on the record (red circle) button
 e) scroll the webpage for few seconds and then stop recording
 f) Take note of the frame rate view
 
-## 3) Verifying time to resize pizzas on views/pizza.html
+#### 3) Verifying time to resize pizzas on views/pizza.html
+
 a) On your chrome browser, visit alwesam.github.com/udportfolio/views/pizza.html or follow the link from index.html
 b) Enter Ctrl+Shift+I, this will show the chrome dev tool
 c) Click on the Console tab
@@ -41,7 +44,7 @@ e) Take note of the values logged in the Console.
 
 ### Optimizations made to index.html
 
-a) Reduced number of unnecessary pixels for pizzera image by resizing the image to a natural size that's equal to its display size.  Number of unnecessary pixels that was transmitted (2048-115)*(1536-75) = 1933x1461, which greatly slowed down the rendering of the index.html page.
+a) Reduced number of unnecessary pixels for pizzeria image by resizing the image to a natural size that's equal to its display size.  Number of unnecessary pixels that was transmitted (2048-115)*(1536-75) = 1933x1461, which greatly slowed down the rendering of the index.html page.
 
 b) Minifed style.css by removing white spaces (used the http://cssminifier.com tool).  Then Base64 encoded the css file and embeded directly in the index.html file
 
