@@ -17,28 +17,28 @@ The optimized pages are hosted at: alwesam.github.com/udportfolio
 
 ### To verify the optimizations made:
 
-#### 1) Verifying the PageSpeed score of index.html
+#### Verifying the PageSpeed score of index.html
 
-a) Visit Google PageSpeed Insights on your web browser
-b) Enter the following website: alwesam.github.com/udportfolio/index.html
-c) Take note of the scores for both mobile and desktop
+1) Visit Google PageSpeed Insights on your web browser
+2) Enter the following website: alwesam.github.com/udportfolio/index.html
+3) Take note of the scores for both mobile and desktop
 
-#### 2) Verifying frame rate of views/pizza.html
+#### Verifying frame rate of views/pizza.html
 
-a) On your chrome browser, visit alwesam.github.com/udportfolio/views/pizza.html or follow the link from index.html
-b) Enter Ctrl+Shift+I, this will show the chrome dev tool
-c) Click on the Timeline tab
-d) Click on the record (red circle) button
-e) scroll the webpage for few seconds and then stop recording
-f) Take note of the frame rate view
+1) On your chrome browser, visit alwesam.github.com/udportfolio/views/pizza.html or follow the link from index.html
+2) Enter Ctrl+Shift+I, this will show the chrome dev tool
+3) Click on the Timeline tab
+4) Click on the record (red circle) button
+5) scroll the webpage for few seconds and then stop recording
+6) Take note of the frame rate view
 
-#### 3) Verifying time to resize pizzas on views/pizza.html
+#### Verifying time to resize pizzas on views/pizza.html
 
-a) On your chrome browser, visit alwesam.github.com/udportfolio/views/pizza.html or follow the link from index.html
-b) Enter Ctrl+Shift+I, this will show the chrome dev tool
-c) Click on the Console tab
-d) On pizzas.html page, find the slider and click to change resize pizzas
-e) Take note of the values logged in the Console.
+1) On your chrome browser, visit alwesam.github.com/udportfolio/views/pizza.html or follow the link from index.html
+2) Enter Ctrl+Shift+I, this will show the chrome dev tool
+3) Click on the Console tab
+4) On pizzas.html page, find the slider and click to change resize pizzas
+5) Take note of the values logged in the Console.
 
 -------------------------------------------
 
