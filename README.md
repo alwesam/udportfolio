@@ -1,65 +1,85 @@
-## Website Performance Optimization portfolio project
+### Web Optimization Project
+----------------------------------
 
-Your challenge, if you wish to accept it (and we sure hope you will), is to optimize this online portfolio for speed! In particular, optimize the critical rendering path and make this page render as quickly as possible by applying the techniques you've picked up in the [Critical Rendering Path course](https://www.udacity.com/course/ud884).
+### The goals of this project:
 
-To get started, check out the repository, inspect the code,
+1) Optimizing index.html to achieve a PageSpeed score of 90 on both mobile and desktop platforms
+2) Optimizing views/pizza.html to achieve a consistent frame rate of 60fps when scrolling in the page
+3) Optimizing views/pizza.html so that the time to resize pizzas (using slider) is less than 5 ms.
 
-### Getting started
+----------------------------------
 
-Some useful tips to help you get started:
+### To visit the project website:
 
-1. Check out the repository
-1. To inspect the site on your phone, you can run a local server
+The optimized pages are hosted at: alwesam.github.com/udportfolio
 
-  ```bash
-  $> cd /path/to/your-project-folder
-  $> python -m SimpleHTTPServer 8080
-  ```
+------------------------------------
 
-1. Open a browser and visit localhost:8080
-1. Download and install [ngrok](https://ngrok.com/) to make your local server accessible remotely.
+### To verify the optimizations made:
 
-  ``` bash
-  $> cd /path/to/your-project-folder
-  $> ngrok 8080
-  ```
+1) Verifying the PageSpeed score of index.html:
+	a) Visit Google PageSpeed Insights on your web browser
+	b) Enter the following website: alwesam.github.com/udportfolio/index.html
+	c) Take note of the scores for both mobile and desktop
 
-1. Copy the public URL ngrok gives you and try running it through PageSpeed Insights! [More on integrating ngrok, Grunt and PageSpeed.](http://www.jamescryer.com/2014/06/12/grunt-pagespeed-and-ngrok-locally-testing/)
+2) Verifying frame rate of views/pizza.html
+	a) On your chrome browser, visit alwesam.github.com/udportfolio/views/pizza.html or follow the link from index.html
+	b) Enter Ctrl+Shift+I, this will show the chrome dev tool
+	c) Click on the Timeline tab
+	d) Click on the record (red circle) button
+	e) scroll the webpage for few seconds and then stop recording
+	f) Take note of the frame rate view
 
-Profile, optimize, measure... and then lather, rinse, and repeat. Good luck!
+3) Verifying time to resize pizzas on views/pizza.html
+	a) On your chrome browser, visit alwesam.github.com/udportfolio/views/pizza.html or follow the link from index.html
+	b) Enter Ctrl+Shift+I, this will show the chrome dev tool
+	c) Click on the Console tab
+	d) On pizzas.html page, find the slider and click to change resize pizzas
+	e) Take note of the values logged in the Console.
 
-### Optimization Tips and Tricks
-* [Optimizing Performance](https://developers.google.com/web/fundamentals/performance/ "web performance")
-* [Analyzing the Critical Rendering Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/analyzing-crp.html "analyzing crp")
-* [Optimizing the Critical Rendering Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/optimizing-critical-rendering-path.html "optimize the crp!")
-* [Avoiding Rendering Blocking CSS](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-blocking-css.html "render blocking css")
-* [Optimizing JavaScript](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/adding-interactivity-with-javascript.html "javascript")
-* [Measuring with Navigation Timing](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/measure-crp.html "nav timing api"). We didn't cover the Navigation Timing API in the first two lessons but it's an incredibly useful tool for automated page profiling. I highly recommend reading.
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/eliminate-downloads.html">The fewer the downloads, the better</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/optimize-encoding-and-transfer.html">Reduce the size of text</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/image-optimization.html">Optimize images</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching.html">HTTP caching</a>
+-------------------------------------------
 
-### Customization with Bootstrap
-The portfolio was built on Twitter's <a href="http://getbootstrap.com/">Bootstrap</a> framework. All custom styles are in `dist/css/portfolio.css` in the portfolio repo.
+### Optimizations made to index.html
 
-* <a href="http://getbootstrap.com/css/">Bootstrap's CSS Classes</a>
-* <a href="http://getbootstrap.com/components/">Bootstrap's Components</a>
+a) Reduced number of unnecessary pixels for pizzera image by resizing the image to a natural size that's equal to its display size.  Number of unnecessary pixels that was transmitted (2048-115)*(1536-75) = 1933x1461, which greatly slowed down the rendering of the index.html page.
 
-### Sample Portfolios
+b) Minifed style.css by removing white spaces (used the http://cssminifier.com tool).  Then Base64 encoded the css file and embeded directly in the index.html file
 
-Feeling uninspired by the portfolio? Here's a list of cool portfolios I found after a few minutes of Googling.
+c) Removed comments and line spaces from index.html
 
-* <a href="http://www.reddit.com/r/webdev/comments/280qkr/would_anybody_like_to_post_their_portfolio_site/">A great discussion about portfolios on reddit</a>
-* <a href="http://ianlunn.co.uk/">http://ianlunn.co.uk/</a>
-* <a href="http://www.adhamdannaway.com/portfolio">http://www.adhamdannaway.com/portfolio</a>
-* <a href="http://www.timboelaars.nl/">http://www.timboelaars.nl/</a>
-* <a href="http://futoryan.prosite.com/">http://futoryan.prosite.com/</a>
-* <a href="http://playonpixels.prosite.com/21591/projects">http://playonpixels.prosite.com/21591/projects</a>
-* <a href="http://colintrenter.prosite.com/">http://colintrenter.prosite.com/</a>
-* <a href="http://calebmorris.prosite.com/">http://calebmorris.prosite.com/</a>
-* <a href="http://www.cullywright.com/">http://www.cullywright.com/</a>
-* <a href="http://yourjustlucky.com/">http://yourjustlucky.com/</a>
-* <a href="http://nicoledominguez.com/portfolio/">http://nicoledominguez.com/portfolio/</a>
-* <a href="http://www.roxannecook.com/">http://www.roxannecook.com/</a>
-* <a href="http://www.84colors.com/portfolio.html">http://www.84colors.com/portfolio.html</a>
+d) Added media attribute to print.css link
+
+e) Added async attribute to google analytics JS script
+
+f) Use javascript at end of html file to load images and google fonts css file after DOM is completely loaded
+
+
+--------------------------------------------------
+
+### Optimization to main.js to improve frame rate when scrolling in views/pizza.html
+
+a) Calculated a unique set of 5 values (phases) outside the For loop in the updatePositions function.
+
+b) Reduced the number animating pizzas in the background from 200 to 24 since this will be maximum number rendered on a 1600x900 screen at any give time.
+
+c) Replaced document.querySelectorAll() to access DOM elements with document.getElementsByClassName(). 
+
+d) Defined an array variable 'items' (that references to all pizzas in the 'mover' class) outside updatePositions function.  Hence, there will be no need to access DOM elements at every scroll.
+
+e) Used transform:translateX() function to change positions of animated pizzas (instead of triggering a relayout event by assiging abosolute values to items.style.left).
+
+f) To reduce paint time, defined the css property (backface-visibility) of the 'mover' class and assigned it the value of 'hidden'.
+
+For more details, check comments on main.js
+
+Optimization to main.js to reduce resizing time in views/pizza.html
+
+a) Ensured that the DOM is being accessed outside the FOR loop in changePizzaSizes function as well as used getElementsByClassName() instead of querySelectorAll().
+
+b) Calculated dx and newwidth outside the FOR loop since it's the same for all pizzas.
+
+c) windowwidth variable is calculated outside determineDX function (or rather outisde the FOR loop in changePizzaSizes function) since it's constant.
+
+For more details, check comments on main.js
+
+
