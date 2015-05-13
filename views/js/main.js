@@ -441,12 +441,8 @@ var resizePizzas = function(size) {
   // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
   function determineDx (elem, size) {
     var oldwidth = elem.offsetWidth;
-    //WH: move outside
-    //var windowwidth = document.querySelector("#randomPizzas").offsetWidth;
     var oldsize = oldwidth / windowwidth;
 
-    // TODO: change to 3 sizes? no more xl?
-    // Changes the slider value to a percent width
     function sizeSwitcher (size) {
       switch(size) {
         case "1":
@@ -480,10 +476,7 @@ var resizePizzas = function(size) {
     var dx = determineDx(pizzaItems[0], size);
     var newwidth = (pizzaItems[0].offsetWidth + dx) + 'px';
 
-    for (var i = 0; i < pizzaItems.length; i++) {      
-      //var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-      //var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      //document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+    for (var i = 0; i < pizzaItems.length; i++) {
       pizzaItems[i].style.width = newwidth;
     }
 
@@ -546,9 +539,6 @@ function updatePositions() {
   window.performance.mark("mark_start_frame");
 
   /* WH: Move items outside the updatefucntion. See DOMContentLoaded eventlistener*/
-  
-  //var items = document.querySelectorAll('.mover');
-
   /* WH: calculate all 5 phases outside the For loop */  
   var x = document.body.scrollTop/1250;
   var phase0 = Math.sin(x);
@@ -558,8 +548,6 @@ function updatePositions() {
   var phase4 = Math.sin(x + 4);
 
   for (var i = 0; i < items.length; i++) {
-    /* WH: a single set of 5 values of phase is calculated outside */
-    //var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
     /* WH: choose what value to use based on item position*/
     var phase = phase0; //default
     if (i % 5 === 1)
@@ -570,11 +558,8 @@ function updatePositions() {
       phase = phase3;
     else if (i % 5 === 4)
       phase = phase4;
-   
-    //items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
     /* WH: use transform:translateX() function to change positions of animated pizzas*/  
     items[i].style.transform = "translateX(" + (100 * phase) + "px)";
-
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -604,12 +589,12 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
-    //elem.basicLeft = (i % cols) * s;
     /**
      * WH: define sytle.left of each image at DOM loading,
      * varying the position will be at updatescroll
      */
     elem.style.left = (i % cols) * s + 'px';
+    elem.style.top = (Math.floor(i / cols) * s) + 'px';
     /* WH: reduces painting time */
     elem.style.backfaceVisibility = "hidden";
     /* WH: change from querySelector to getElementbyID */
