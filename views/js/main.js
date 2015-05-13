@@ -401,10 +401,22 @@ var pizzaElementGenerator = function(i) {
 };
 
 // resizePizzas(size) is called when the slider in the "Our Pizzas" section of the website moves.
+/**
+ * WH: This function is modified to increase the computation efficiency of resizing pizzas in pizza.html
+ * to less than 5ms
+ * The following changes were made in the following inside functions:
+ * determineDx: one single change
+ * - moved the calculation of windowwidth variable outside the function
+ * changePizzaSizes: few changes to the For loop logic
+ * - Ensured that DOM is not accessed repeatedly by removing the associated logic from the FOR loop
+ */
 var resizePizzas = function(size) { 
   window.performance.mark("mark_start_resize");   // User Timing API function
 
   // Changes the value for the size of the pizza above the slider
+  /**
+   * WH: This function is left intact
+   */
   function changeSliderLabel(size) {
     switch(size) {
       case "1":
@@ -422,16 +434,15 @@ var resizePizzas = function(size) {
   }
 
   changeSliderLabel(size);
-
-  /**
-   * pull windowwidth variables outside determineDx function since it's the same
-   */
+ 
+  /* WH: pull windowwidth variables outside determineDx function since it's constant */
   var windowwidth = document.querySelector("#randomPizzas").offsetWidth;
 
   // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
   function determineDx (elem, size) {
     var oldwidth = elem.offsetWidth;
-
+    //WH: move outside
+    //var windowwidth = document.querySelector("#randomPizzas").offsetWidth;
     var oldsize = oldwidth / windowwidth;
 
     // TODO: change to 3 sizes? no more xl?
@@ -458,18 +469,21 @@ var resizePizzas = function(size) {
   function changePizzaSizes(size) {
 
      /** 
-      * The DOM is only being accessed once before the FOR loopa and using 
+      * WH: The DOM is only being accessed once before the FOR loopa and using 
       * getElementsByClassName() instead of querySelectorAll()
       */
     var pizzaItems = document.getElementsByClassName("randomPizzaContainer");
     /**
-     * dx and newwidth are the same for all pizzas, so one set of values are calucated for a single
+     * WH: dx and newwidth are the same for all pizzas, so one set of values are calucated for a single
      * element and then applied to all other pizzas
      */
     var dx = determineDx(pizzaItems[0], size);
     var newwidth = (pizzaItems[0].offsetWidth + dx) + 'px';
 
-    for (var i = 0; i < pizzaItems.length; i++) {
+    for (var i = 0; i < pizzaItems.length; i++) {      
+      //var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
+      //var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
+      //document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
       pizzaItems[i].style.width = newwidth;
     }
 
@@ -521,7 +535,8 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
 /**
- * items is defined here instead of accessing the DOM at every scroll
+ * WH: items is defined here and will be defined inside the addEventListner function
+ * once instead of accessing the DOM at every scroll.
  * use getElementsByClassName instead of QuerySelectorAll since it's faster
  */
 var items;
@@ -529,17 +544,12 @@ var items;
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
-  //console.log(items.length);
 
-  /**
-   * Move items outside the updatefucntion. See DOMContentLoaded eventlistener
-   */
+  /* WH: Move items outside the updatefucntion. See DOMContentLoaded eventlistener*/
+  
   //var items = document.querySelectorAll('.mover');
 
-  /**
-   * calculate all phases outside the For loop
-   * 
-   */
+  /* WH: calculate all 5 phases outside the For loop */  
   var x = document.body.scrollTop/1250;
   var phase0 = Math.sin(x);
   var phase1 = Math.sin(x + 1);
@@ -548,8 +558,9 @@ function updatePositions() {
   var phase4 = Math.sin(x + 4);
 
   for (var i = 0; i < items.length; i++) {
-
+    /* WH: a single set of 5 values of phase is calculated outside */
     //var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
+    /* WH: choose what value to use based on item position*/
     var phase = phase0; //default
     if (i % 5 === 1)
       phase = phase1;
@@ -559,10 +570,9 @@ function updatePositions() {
       phase = phase3;
     else if (i % 5 === 4)
       phase = phase4;
-
-    /**
-     * change position by phase
-     */  
+   
+    //items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    /* WH: use transform:translateX() function to change positions of animated pizzas*/  
     items[i].style.transform = "translateX(" + (100 * phase) + "px)";
 
   }
@@ -585,7 +595,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
   /**
-   * only need a handful, instead of 200, choose 24, since a maximum of 24 will be
+   * WH: only need a handful; instead of 200, choose 24, since a maximum of 24 will be
    * rendered on a desktop screen anytime (1600x900 screen)
    */
   for (var i = 0; i < 24; i++) {
@@ -596,23 +606,17 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.style.width = "73.333px";
     //elem.basicLeft = (i % cols) * s;
     /**
-     * define sytle.left of each image at DOM loading, varying the position will be at updatescroll
+     * WH: define sytle.left of each image at DOM loading,
+     * varying the position will be at updatescroll
      */
     elem.style.left = (i % cols) * s + 'px';
-    elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    /**
-     * reduces painting time
-     */
+    /* WH: reduces painting time */
     elem.style.backfaceVisibility = "hidden";
-    /**
-     * change from querySelector to getElementbyID
-     */
+    /* WH: change from querySelector to getElementbyID */
     document.getElementById('movingPizzas1').appendChild(elem);
   }
 
-  /**
-   * define items at reload and before calling updatePositions
-   */
+  /* WH: define items at reload and before calling updatePositions */
    items = document.getElementsByClassName('mover');
   
   updatePositions();

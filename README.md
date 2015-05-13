@@ -19,25 +19,36 @@ The optimized pages are hosted at: alwesam.github.com/udportfolio
 
 #### Verifying the PageSpeed score of index.html
 
-1) Visit Google PageSpeed Insights on your web browser
-2) Enter the following website: alwesam.github.com/udportfolio/index.html
-3) Take note of the scores for both mobile and desktop
+1) Visit Google PageSpeed Insights on your web browser.
+
+2) Enter the following website: alwesam.github.com/udportfolio/index.html.
+
+3) Take note of the scores for both mobile and desktop.
 
 #### Verifying frame rate of views/pizza.html
 
-1) On your chrome browser, visit alwesam.github.com/udportfolio/views/pizza.html or follow the link from index.html
-2) Enter Ctrl+Shift+I, this will show the chrome dev tool
-3) Click on the Timeline tab
-4) Click on the record (red circle) button
-5) scroll the webpage for few seconds and then stop recording
-6) Take note of the frame rate view
+1) On your chrome browser, visit alwesam.github.com/udportfolio/views/pizza.html or follow the link from index.html.
+
+2) Enter Ctrl+Shift+I, this will show the chrome dev tool.
+
+3) Click on the Timeline tab.
+
+4) Click on the record (red circle) button.
+
+5) scroll the webpage for few seconds and then stop recording.
+
+6) Take note of the frame rate view.
 
 #### Verifying time to resize pizzas on views/pizza.html
 
-1) On your chrome browser, visit alwesam.github.com/udportfolio/views/pizza.html or follow the link from index.html
-2) Enter Ctrl+Shift+I, this will show the chrome dev tool
-3) Click on the Console tab
-4) On pizzas.html page, find the slider and click to change resize pizzas
+1) On your chrome browser, visit alwesam.github.com/udportfolio/views/pizza.html or follow the link from index.html.
+
+2) Enter Ctrl+Shift+I, this will show the chrome dev tool.
+
+3) Click on the Console tab.
+
+4) On pizzas.html page, find the slider and click to change resize pizzas.
+
 5) Take note of the values logged in the Console.
 
 -------------------------------------------
@@ -86,5 +97,6 @@ b) Calculated dx and newwidth outside the FOR loop since it's the same for all p
 c) windowwidth variable is calculated outside determineDX function (or rather outisde the FOR loop in changePizzaSizes function) since it's constant.
 
 For more details, check comments on main.js
+#### Please note that my comments start with my initials: WH
 
 
