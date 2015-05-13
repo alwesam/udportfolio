@@ -3,15 +3,17 @@
 
 ### The goals of this project:
 
-1) Optimizing index.html to achieve a PageSpeed score of 90 on both mobile and desktop platforms
-2) Optimizing views/pizza.html to achieve a consistent frame rate of 60fps when scrolling in the page
+1) Optimizing index.html to achieve a PageSpeed score of 90 on both mobile and desktop platforms.
+
+2) Optimizing views/pizza.html to achieve a consistent frame rate of 60fps when scrolling in the page.
+
 3) Optimizing views/pizza.html so that the time to resize pizzas (using slider) is less than 5 ms.
 
 ----------------------------------
 
 ### To visit the project website:
 
-The optimized pages are hosted at: alwesam.github.com/udportfolio
+The optimized pages are hosted at: alwesam.github.io/udportfolio
 
 ------------------------------------
 
