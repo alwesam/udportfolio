@@ -410,8 +410,20 @@ var pizzaElementGenerator = function(i) {
  * changePizzaSizes: few changes to the For loop logic
  * - Ensured that DOM is not accessed repeatedly by removing the associated logic from the FOR loop
  */
+
+/** 
+ * WH: The DOM is only being accessed once after the page loads and all pizzas are generated 
+ * getElementsByClassName() instead of querySelectorAll()
+ */
+var pizzaItems = document.getElementsByClassName("randomPizzaContainer");
+/* WH: pull windowwidth variables outside resizePizzas function since it's constant */
+var windowwidth = document.querySelector("#randomPizzas").offsetWidth;
+
 var resizePizzas = function(size) { 
   window.performance.mark("mark_start_resize");   // User Timing API function
+
+  /*WH: calculate length once*/
+  var pizzaItemsLen = pizzaItems.length;
 
   // Changes the value for the size of the pizza above the slider
   /**
@@ -434,9 +446,6 @@ var resizePizzas = function(size) {
   }
 
   changeSliderLabel(size);
- 
-  /* WH: pull windowwidth variables outside determineDx function since it's constant */
-  var windowwidth = document.querySelector("#randomPizzas").offsetWidth;
 
   // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
   function determineDx (elem, size) {
@@ -464,11 +473,6 @@ var resizePizzas = function(size) {
 
   function changePizzaSizes(size) {
 
-     /** 
-      * WH: The DOM is only being accessed once before the FOR loopa and using 
-      * getElementsByClassName() instead of querySelectorAll()
-      */
-    var pizzaItems = document.getElementsByClassName("randomPizzaContainer");
     /**
      * WH: dx and newwidth are the same for all pizzas, so one set of values are calucated for a single
      * element and then applied to all other pizzas
@@ -476,7 +480,7 @@ var resizePizzas = function(size) {
     var dx = determineDx(pizzaItems[0], size);
     var newwidth = (pizzaItems[0].offsetWidth + dx) + 'px';
 
-    for (var i = 0; i < pizzaItems.length; i++) {
+    for (var i = 0; i < pizzaItemsLen; i++) {
       pizzaItems[i].style.width = newwidth;
     }
 
@@ -533,6 +537,7 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
  * use getElementsByClassName instead of QuerySelectorAll since it's faster
  */
 var items;
+var itemsLen;
 
 function updatePositions() {
   frame++;
@@ -547,7 +552,7 @@ function updatePositions() {
   var phase3 = Math.sin(x + 3);
   var phase4 = Math.sin(x + 4);
 
-  for (var i = 0; i < items.length; i++) {
+  for (var i = 0; i < itemsLen; i++) {
     /* WH: choose what value to use based on item position*/
     var phase = phase0; //default
     if (i % 5 === 1)
@@ -579,11 +584,14 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
+
   /**
-   * WH: only need a handful; instead of 200, choose 24, since a maximum of 24 will be
-   * rendered on a desktop screen anytime (1600x900 screen)
+   * WH: only need a handful; instead of 200, choose a value that just fills the screen
+   * Number of Pizzas is calculated based on number of columns (8) and the available screen 
+   * height, which is calculated using screen.availHeight.
    */
-  for (var i = 0; i < 24; i++) {
+  var numPizzas = cols*Math.floor(screen.availHeight/s);
+  for (var i = 0; i < numPizzas; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
@@ -603,6 +611,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
   /* WH: define items at reload and before calling updatePositions */
    items = document.getElementsByClassName('mover');
+   /*WH: as well as the items length*/
+   itemsLen = items.length;
   
   updatePositions();
 });
